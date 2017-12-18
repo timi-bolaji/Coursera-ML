@@ -25,12 +25,17 @@ sigma = zeros(1, size(X, 2));
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
+for i = 1:size(X,2)
+    mu(i) = sum(X(:,i))/size(X,1);
+    sigma(i) = std(X(:,i));
+    X_norm(:,i) = (X(:,i) - mu(i)) / sigma(i);
 
+end
 
+% disp(X_norm);
 
-
-
-
+% disp('Timi pause');
+% pause;
 
 
 
