@@ -77,6 +77,8 @@ k = 1 - y - ((-1).^y).*a3;
 % disp(size(a3));
 % pause;
 J = sum(sum((-log(k))));
+% Add regularization
+J = J + 0.5*lambda*(sum(sum((Theta1.^2)(:, 2:end))) + sum(sum((Theta2.^2)(:, 2:end))));
 J = J/m;
 
 
