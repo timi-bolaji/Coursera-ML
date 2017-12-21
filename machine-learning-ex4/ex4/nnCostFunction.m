@@ -62,7 +62,22 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+X = [ones(m,1),X];
 
+% Re-code y as vector.
+y = eye(num_labels)(y,:);
+
+% Compute a2 and attach ones for bias nodes
+a2 = sigmoid(X * Theta1');
+a2 = [ones(size(a2,1),1) a2];
+
+a3 = sigmoid(a2 * Theta2');
+
+k = 1 - y - ((-1).^y).*a3;
+% disp(size(a3));
+% pause;
+J = sum(sum((-log(k))));
+J = J/m;
 
 
 
