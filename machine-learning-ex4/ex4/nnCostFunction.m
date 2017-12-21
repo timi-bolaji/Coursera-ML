@@ -81,12 +81,32 @@ J = sum(sum((-log(k))));
 J = J + 0.5*lambda*(sum(sum((Theta1.^2)(:, 2:end))) + sum(sum((Theta2.^2)(:, 2:end))));
 J = J/m;
 
+for t=1:m
+    a1 = X(t,:)';
 
+    z2 = Theta1 * a1;
+    a2 = sigmoid(z2);
+    a2 = [1; a2];
 
+    z3 = Theta2 * a2;
+    a3 = sigmoid(z3);
+    d3 = a3 - (y(t,:))';
 
+    d2 = (Theta2(:,2:end)' * d3) .* sigmoidGradient(z2);
+    
+    % disp(size(d2));
+    % disp(size(d3));
+    % disp(size(a1));
+    % disp(size(a2));
+    % disp(size(a3));
+    % pause;
 
+    Theta1_grad = Theta1_grad + (d2 * a1');
+    Theta2_grad = Theta2_grad + (d3 * a2');
+end
 
-
+Theta1_grad = Theta1_grad/m;
+Theta2_grad = Theta2_grad/m;
 
 
 
