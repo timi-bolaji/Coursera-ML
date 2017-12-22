@@ -14,9 +14,12 @@ X_poly = zeros(numel(X), p);
 %               column of X contains the values of X to the p-th power.
 %
 % 
+X_poly = X_poly + X;
+X_poly = X_poly.^find(X_poly(1,:));
 
-
-
+% for i=1:p
+%     X_poly(:,i) = X.^i;
+% end
 
 
 
