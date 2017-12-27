@@ -23,8 +23,34 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+% CMatrix = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30];
+% sigmaMatrix = [0.01; 0.03; 0.1; 0.3; 1; 3; 10; 30];
+% minError = 1;
+% minC = 100;
+% minSig = 100;
 
+% for i=1:8
+%     curC = CMatrix(i);
+%     for j=1:8
+%         curSigma = sigmaMatrix(j);
+%         model= svmTrain(X, y, curC, @(x1, x2) gaussianKernel(x1, x2, curSigma));
+%         predictions = svmPredict(model,Xval);
+%         error = mean(double(predictions ~= yval));
+%         fprintf('C = %f ; Sig = %f ; error = %f', curC, curSigma, error);
 
+%         if (error <= minError)
+%             minError = error;
+%             minC = curC;
+%             minSig = curSigma;
+%         endif
+%     end
+% end
+
+% fprintf('Cmin = %f ; Sigmin = %f ; minError = %f', minC, minSig, minError);
+% pause;
+
+C = 1;
+sigma = 0.1;
 
 
 
