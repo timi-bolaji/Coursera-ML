@@ -26,9 +26,15 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+b = idx == 1:K;
+centroids = (b' * X) ./ sum(b)';
 
 
-
+% for i=1:K
+%     selections = idx==i;
+%     cur = X.*(selections);
+%     centroids(i,:) = mean(cur)*m/sum(selections);
+% end
 
 
 
