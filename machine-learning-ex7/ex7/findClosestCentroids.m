@@ -20,11 +20,26 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+[m n] = size(X);
 
-for i=1:size(X,1)
-    diff = X(i,:) - centroids; % Should give a Kxn matrix
-    [trash idx(i)] = min(norm(diff,'rows').^2);
-end
+% Create a matrix repeating every example k times and subtract the set of 
+% centroids from each k-sized set of repeated examples
+diff = reshape(repmat(X(:)',K,1)(:),m*K,n) - repmat(centroids,m,1); 
+
+diff = norm(diff,'rows').^2; % Find norm for every k for every m Should be (k*m) x 1
+
+% Reshape into a matrix with m rows and k columns containing norms for k centroids
+diff = reshape(diff,K,m)';
+% Get indices of minima
+[trash idx] = min(diff');
+idx = idx';
+
+
+% Unvectorized implementation
+% for i=1:size(X,1)
+%     diff = X(i,:) - centroids; % Should give a Kxn matrix
+%     [trash idx(i)] = min(norm(diff,'rows').^2);
+% end
 
 
 
